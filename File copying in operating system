@@ -1,0 +1,35 @@
+#include&lt;stdio.h&gt;
+void calculate(int pid[],int bt[],int wt[],int tat[],int n)
+{
+wt[0]=0;
+tat[0]=bt[0];
+for(int i=1;i&lt;n;i++)
+{
+wt[i]=wt[i-1]+bt[i-1];
+tat[i]=wt[i]+bt[i];
+}
+}
+void display(int pid[],int bt[],int wt[],int tat[],int n)
+{
+printf(&quot;\nprocess burst time waiting time turnaround time\n&quot;);
+
+for(int i=0;i&lt;n;i++)
+{
+printf(&quot;%d\t %d\t %d\t %d\n&quot;,pid[i],bt[i],wt[i],tat[i]);
+}
+}
+int main()
+{
+int n;
+scanf(&quot;%d&quot;,&amp;n);
+int pid[n],bt[n],wt[n],tat[n];
+printf(&quot;enter burst time of processes : \n&quot;);
+for(int i=0;i&lt;n;i++)
+{
+pid[i]=i+1;
+printf(&quot;process %d : &quot;,i+1);
+scanf(&quot;%d&quot;,&amp;bt[i]);
+}
+calculate(pid,bt,wt,tat,n);
+display(pid,bt,wt,tat,n);
+}
