@@ -1,0 +1,46 @@
+#include &lt;stdio.h&gt;
+#define MAX 10
+void preemptivePriority(int at[], int bt[], int pr[], int n) {
+int rt[MAX], wt[MAX], ct[MAX];
+int time = 0, completed = 0, min_index;
+for (int i = 0; i &lt; n; i++) {
+rt[i] = bt[i];
+wt[i] = 0;
+}
+printf(&quot;Process Completion Time Waiting Time\n&quot;);
+while (completed &lt; n) {
+min_index = -1;
+for (int i = 0; i &lt; n; i++) {
+if (at[i] &lt;= time &amp;&amp; rt[i] &gt; 0 &amp;&amp; (min_index == -1 || pr[i] &lt; pr[min_index])) {
+min_index = i;
+}
+}
+if (min_index == -1) {
+time++;
+continue;
+}
+rt[min_index]--;
+for (int i = 0; i &lt; n; i++) {
+if (i != min_index &amp;&amp; rt[i] &gt; 0 &amp;&amp; at[i] &lt;= time) {
+wt[i]++;
+}
+}
+if (rt[min_index] == 0) {
+completed++;
+ct[min_index] = time + 1;
+printf(&quot;%7d %15d %12d\n&quot;, min_index + 1, ct[min_index], wt[min_index]);
+}
+time++;
+}
+}
+int main() {
+int n, at[MAX], bt[MAX], pr[MAX];
+printf(&quot;Enter number of processes: &quot;);
+scanf(&quot;%d&quot;, &amp;n);
+for (int i = 0; i &lt; n; i++) {
+printf(&quot;Enter arrival time, burst time, and priority for process %d: &quot;, i + 1);
+scanf(&quot;%d %d %d&quot;, &amp;at[i], &amp;bt[i], &amp;pr[i]);
+}
+preemptivePriority(at, bt, pr, n);
+return 0;
+}
