@@ -1,0 +1,45 @@
+#include &lt;stdio.h&gt;
+void sjf(int p[], int a[], int b[], int n)
+{
+int w[n], t[n], tw = 0, tt = 0, time = 0;
+for (int i = 0; i &lt; n; i++)
+{
+int min = i;
+for (int j = i + 1; j &lt; n; j++)
+
+{
+
+if (a[j] &lt;= time &amp;&amp; b[j] &lt; b[min])
+min = j;
+}
+int temp;
+temp = p[i]; p[i] = p[min]; p[min] = temp;
+temp = a[i]; a[i] = a[min]; a[min] = temp;
+temp = b[i]; b[i] = b[min]; b[min] = temp;
+
+if (time &lt; a[i]) time = a[i];
+time += b[i];
+t[i] = time - a[i];
+w[i] = t[i] - b[i];
+tw += w[i];
+tt += t[i];
+}
+printf(&quot;\nP A B W T\n&quot;);
+for (int i = 0; i &lt; n; i++)
+printf(&quot;%d %d %d %d %d\n&quot;, p[i], a[i], b[i], w[i], t[i]);
+printf(&quot;\nAvg W: %.2f\nAvg T: %.2f\n&quot;, (float)tw / n, (float)tt / n);
+}
+
+int main() {
+int n;
+printf(&quot;Enter number of processes: &quot;);
+scanf(&quot;%d&quot;, &amp;n);
+int p[n], a[n], b[n];
+printf(&quot;Enter A and B for each process:\n&quot;);
+for (int i = 0; i &lt; n; i++) {
+p[i] = i + 1;
+scanf(&quot;%d %d&quot;, &amp;a[i], &amp;b[i]);
+}
+sjf(p, a, b, n);
+return 0;
+}
