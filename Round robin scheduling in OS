@@ -1,0 +1,32 @@
+#include <stdio.h>
+#define TIME_QUANTUM 2
+void roundRobinScheduling(int processes[], int n, int burst_time[]) {
+    int remaining_time[n];
+    for (int i = 0; i < n; i++)
+        remaining_time[i] = burst_time[i];
+    int t = 0;
+    while (1) {
+        int done = 1;
+        for (int i = 0; i < n; i++) {
+            if (remaining_time[i] > 0) {
+                done = 0;
+                if (remaining_time[i] > TIME_QUANTUM) {
+                    t += TIME_QUANTUM;
+                    remaining_time[i] -= TIME_QUANTUM;
+                } else {
+                    t += remaining_time[i];
+                    printf("Process %d completed at time %d\n", processes[i], t);
+                    remaining_time[i] = 0;
+                }
+            }
+        }
+        if (done == 1) break;
+    }
+}
+int main() {
+    int processes[] = {1, 2, 3};
+    int n = sizeof(processes) / sizeof(processes[0]);
+    int burst_time[] = {5, 4, 3};
+    roundRobinScheduling(processes, n, burst_time);
+    return 0;
+}
