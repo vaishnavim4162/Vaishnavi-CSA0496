@@ -1,0 +1,21 @@
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+struct Directory {
+char user[20];
+char files[5][20];
+int file_count;
+};
+
+int main() {
+
+struct Directory users[2] = {{&quot;User1&quot;, {&quot;a.txt&quot;, &quot;b.txt&quot;}, 2}, {&quot;User2&quot;, {&quot;x.txt&quot;, &quot;y.txt&quot;},
+2}};
+
+for (int i = 0; i &lt; 2; i++) {
+printf(&quot;Directory for %s:\n&quot;, users[i].user);
+for (int j = 0; j &lt; users[i].file_count; j++)
+printf(&quot; %s\n&quot;, users[i].files[j]);
+}
+return 0;
+}
