@@ -1,0 +1,14 @@
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+struct File {
+char name[20];
+};
+
+int main() {
+struct File files[5] = {{&quot;file1.txt&quot;}, {&quot;file2.txt&quot;}, {&quot;file3.txt&quot;}};
+for (int i = 0; i &lt; 3; i++)
+
+printf(&quot;File: %s\n&quot;, files[i].name);
+return 0;
+}
