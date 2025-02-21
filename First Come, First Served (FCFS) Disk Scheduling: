@@ -1,0 +1,26 @@
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+void FCFS(int arr[], int n, int head) {
+int seek_sequence[n];
+int seek_count = 0;
+for (int i = 0; i &lt; n; i++) {
+seek_sequence[i] = arr[i];
+seek_count += abs(arr[i] - head);
+
+head = arr[i];
+}
+printf(&quot;Total number of seek operations = %d\n&quot;, seek_count);
+printf(&quot;Seek Sequence is:\n&quot;);
+for (int i = 0; i &lt; n; i++) {
+printf(&quot;%d\n&quot;, seek_sequence[i]);
+}
+}
+
+int main() {
+int arr[] = {98, 183, 37, 122, 14, 124, 65, 67};
+int n = sizeof(arr) / sizeof(arr[0]);
+int head = 53;
+FCFS(arr, n, head);
+return 0;
+}
